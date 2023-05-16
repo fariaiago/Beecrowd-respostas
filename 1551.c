@@ -67,6 +67,18 @@ void list_print(lista *l)
 	}
 }
 
+void deletar(lista *l)
+{
+	no *aux = l->inicio;
+	while(aux != NULL)
+	{
+		no *tmp = aux->prox;
+		free(aux);
+		aux = tmp;
+	}
+	free(l);
+}
+
 int main()
 {
 	lista *letras;
@@ -89,17 +101,18 @@ int main()
 		//list_print(letras);
 		if (letras->tamanho == 26)
 		{
-			printf("frase completa\n");
+			printf("frase completa");
 		}
 		else if (letras->tamanho >= 13)
 		{
-			printf("frase quase completa\n");
+			printf("frase quase completa");
 		}
 		else
 		{
-			printf("frase mal elaborada\n");
+			printf("frase mal elaborada");
 		}
-		free(letras);
+		printf("\n");
+		deletar(letras);
 	}
 	return 0;
 }
