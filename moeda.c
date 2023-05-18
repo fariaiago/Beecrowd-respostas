@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
+#include <locale.h>
+
+#define N 1000.0
 
 /**
  * Representa ponto com coordenada X e Y
@@ -16,15 +20,27 @@ int randint(int);
 
 int main()
 {
+	setlocale(LC_NUMERIC, "French_Canada.1252");
 	//Seeda o rand()
 	srand(time(NULL));
 
 	//Roda 1000 rodadas
-	for (int i = 0; i < 1000; i++)
+	for (int j = 0; j < 100; j++)
 	{
-		ponto *p = jogar();
-		//Imprime o valor da rodada na tela, que permite que o valor seja importado numa planilha
-		printf("%d, %d\n", p->x, p->y);
+		double sx = 0, sxx = 0, syy = 0, sy = 0, sxy = 0;
+		for (int i = 0; i < N; i++)
+		{
+			ponto *p = jogar();
+			//Imprime o valor da rodada na tela, que permite que o valor seja importado numa planilha
+			//printf("%d, %d\n", p->x, p->y);
+			sx += p->x;
+			sy += p->y;
+			sxx += pow(p->x, 2);
+			syy += pow(p->y, 2);
+			sxy += p->x * p->y;
+		}
+		double covar = sxy - (sx * sy) / N, varX = sxx - pow(sx, 2) / N, varY = syy - pow(sy, 2) / N;
+		printf("%f\n", covar / sqrt(varX * varY));
 	}
 	return 0;
 }
