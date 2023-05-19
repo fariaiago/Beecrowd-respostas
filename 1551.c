@@ -57,16 +57,6 @@ bool eNovo(lista *l, char ltr)
 	return true;
 }
 
-void list_print(lista *l)
-{
-	no *tmp = l->inicio;
-	while (tmp != NULL)
-	{
-		printf("%c -> ", tmp->ltr);
-		tmp = tmp->prox;
-	}
-}
-
 void deletar(lista *l)
 {
 	no *aux = l->inicio;
@@ -97,7 +87,6 @@ int main()
 				inserir(letras, letra);
 			scf = scanf("%c", &letra);
 		}
-		//list_print(letras);
 		if (letras->tamanho == 26)
 			puts("frase completa");
 		else if (letras->tamanho >= 13)
