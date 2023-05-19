@@ -20,12 +20,11 @@ int main()
 				break;
 			}
 		}
-		double t = (log10(pi1) - log10(pi2)) / (log10(1.0 + (c2 / 100.0) ) - log10(1.0 + (c1 / 100.0) ));
-		//pos = (int) t;
-		if(pos == -1)
+		//double t = (log(pi1) - log(pi2)) / (log(1.0 + (c2 / 100.0) ) - log(1.0 + (c1 / 100.0) ));
+		if(pos >= 100)
 			printf("Mais de 1 seculo.\n");
 		else
-			printf("%d anos.\n", pos+1);
+			printf("%d anos.\n", pos + 1);
 		pos = -1;
 	}
 	return 0;
