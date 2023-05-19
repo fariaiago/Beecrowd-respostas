@@ -89,29 +89,21 @@ int main()
 	for (int i = 0; i < n; i++)
 	{
 		letras = init();
+		
 		scf = scanf("%c", &letra);
 		while (letra != '\n' && scf != EOF)
 		{
 			if(eNovo(letras, letra))
-			{
 				inserir(letras, letra);
-			}
 			scf = scanf("%c", &letra);
 		}
 		//list_print(letras);
 		if (letras->tamanho == 26)
-		{
-			printf("frase completa");
-		}
+			puts("frase completa");
 		else if (letras->tamanho >= 13)
-		{
-			printf("frase quase completa");
-		}
+			puts("frase quase completa");
 		else
-		{
-			printf("frase mal elaborada");
-		}
-		printf("\n");
+			puts("frase mal elaborada");
 		deletar(letras);
 	}
 	return 0;

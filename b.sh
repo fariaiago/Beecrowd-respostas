@@ -1,3 +1,3 @@
 #!/bin/bash
-gcc -ansi $1 -o out -std=c99 -O2 -lm
+gcc -ansi -O2 -std=c99 $1 -o out -lm
 ./out $2

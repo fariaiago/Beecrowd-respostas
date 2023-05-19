@@ -9,6 +9,7 @@ int main()
 	for(int i = 0; i < t; i++)
 	{
 		lixo = scanf(" %d %d %lf %lf", &p1, &p2, &c1, &c2);
+		int pi1 = p1, pi2 = p2;
 		for(int j = 0; j < 100; j++)
 		{
 			p1 += (int)floor(p1 * (c1/100.0));
@@ -19,6 +20,8 @@ int main()
 				break;
 			}
 		}
+		double t = (log10(pi1) - log10(pi2)) / (log10(1.0 + (c2 / 100.0) ) - log10(1.0 + (c1 / 100.0) ));
+		//pos = (int) t;
 		if(pos == -1)
 			printf("Mais de 1 seculo.\n");
 		else
