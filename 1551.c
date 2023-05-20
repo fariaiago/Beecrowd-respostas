@@ -1,99 +1,41 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 #include <stdbool.h>
-#include <ctype.h>
 
-typedef struct no
+#define LETRAS "abcdefghijklmnopqrstuvwxyz"
+
+bool eh_nova(char ltr, char ltrs[26])
 {
-	char ltr;
-	struct no *prox;
-} no;
-
-
-typedef struct lista
-{
-	no* inicio;
-	int tamanho;
-} lista;
-
-void inserir(lista *l, char ltr)
-{
-	no *novo = malloc(sizeof(no));
-	novo->ltr = ltr;
-	novo->prox = NULL;
-	if(l->inicio == NULL)
-		l->inicio = novo;
-	else
-	{
-		no *tmp = l->inicio;
-		while(tmp->prox != NULL)
-			tmp = tmp->prox;
-		tmp->prox = novo;
-	}
-	l->tamanho++;
+	for (int i = 0; i < 26; i++)
+		if(ltr == ltrs[i])
+		{
+			ltrs[i] = '1';
+			return true;
+		}
+	return false;
 }
 
-lista *init()
+int main(void)
 {
-	lista *l = malloc(sizeof(lista));
-	l->inicio = NULL;
-	return l;
-}
-
-bool eNovo(lista *l, char ltr)
-{
-	if(isalpha(ltr) == 0)
-		return false;
-	if (l->inicio == NULL)
-		return true;
-	
-	no *tmp = l->inicio;
-	while (tmp != NULL)
-	{
-		if (tmp->ltr  == ltr)
-			return false;
-		tmp = tmp->prox;
-	}
-	return true;
-}
-
-void deletar(lista *l)
-{
-	no *aux = l->inicio;
-	while(aux != NULL)
-	{
-		no *tmp = aux->prox;
-		free(aux);
-		aux = tmp;
-	}
-	free(l);
-}
-
-int main()
-{
-	lista *letras;
-	char letra;
-	int n, scf = 0;
-	scf = scanf(" %d", &n);
-	getchar();
+	int n, scf = scanf(" %d ", &n);
 	for (int i = 0; i < n; i++)
 	{
-		letras = init();
-		
+		int n_letras = 0;
+		char letra, letras[26];
+		strncpy(letras, LETRAS, 26);
 		scf = scanf("%c", &letra);
 		while (letra != '\n' && scf != EOF)
 		{
-			if(eNovo(letras, letra))
-				inserir(letras, letra);
+			if(eh_nova(letra, letras))
+				n_letras++;
 			scf = scanf("%c", &letra);
 		}
-		if (letras->tamanho == 26)
+		if (n_letras == 26)
 			puts("frase completa");
-		else if (letras->tamanho >= 13)
+		else if (n_letras >= 13)
 			puts("frase quase completa");
 		else
 			puts("frase mal elaborada");
-		deletar(letras);
 	}
 	return 0;
 }
