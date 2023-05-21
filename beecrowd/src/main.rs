@@ -15,7 +15,7 @@ fn main() {
 				}
 				println!("Sum={}", sum);
 			},
-			Err(_) => break
+			_ => ()
 		};
 	}
 }
